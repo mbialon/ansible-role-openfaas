@@ -4,3 +4,4 @@ openfaas_cli_script_path: /tmp/faas-cli.sh
 
 openfaas_repo_url: https://github.com/openfaas/faas.git
 openfaas_path: faas
+openfaas_version: 0.18.18

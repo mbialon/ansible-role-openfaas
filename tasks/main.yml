@@ -25,6 +25,7 @@
   git:
     repo: "{{ openfaas_repo_url }}"
     dest: "{{ openfaas_path }}"
+    version: "{{ openfaas_version }}"
 
 - name: Deploy faas
   command: ./deploy_stack.sh
