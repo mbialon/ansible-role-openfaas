@@ -1,0 +1,35 @@
+---
+- name: Register faas-cli version
+  command: /usr/local/bin/faas-cli version --short-version
+  register: faascli_version
+  ignore_errors: yes
+  changed_when: no
+
+- name: Download faas-cli install script
+  get_url:
+    url: "{{ openfaas_cli_script_url }}"
+    dest: "{{ openfaas_cli_script_path }}"
+    mode: 0755
+  when: faascli_version is failed
+
+- name: Execute faas-cli install script
+  command: "{{ openfaas_cli_script_path }}"
+  when: faascli_version is failed
+
+- name: Remove faas-cli install script
+  file:
+    path: "{{ openfaas_cli_script_path }}"
+    state: absent
+
+- name: Get faas
+  git:
+    repo: "{{ openfaas_repo_url }}"
+    dest: "{{ openfaas_path }}"
+
+- name: Deploy faas
+  command: ./deploy_stack.sh
+  args:
+    chdir: "{{ openfaas_path }}"
+  register: faas
+
+- debug: msg="{{ faas.stdout }}"

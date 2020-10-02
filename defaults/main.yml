@@ -1,0 +1,6 @@
+---
+openfaas_cli_script_url: https://cli.openfaas.com
+openfaas_cli_script_path: /tmp/faas-cli.sh
+
+openfaas_repo_url: https://github.com/openfaas/faas.git
+openfaas_path: faas
