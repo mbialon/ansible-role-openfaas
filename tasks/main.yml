@@ -11,15 +11,17 @@
     dest: "{{ openfaas_cli_script_path }}"
     mode: 0755
   when: faascli_version is failed
+  register: faascli_installer_download
 
 - name: Execute faas-cli install script
   command: "{{ openfaas_cli_script_path }}"
-  when: faascli_version is failed
+  when: faascli_installer_download is succeeded
 
 - name: Remove faas-cli install script
   file:
     path: "{{ openfaas_cli_script_path }}"
     state: absent
+  when: faascli_installer_download is succeeded
 
 - name: Get faas
   git:
