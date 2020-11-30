@@ -31,7 +31,7 @@
     version: "{{ openfaas_version }}"
 
 - name: Deploy faas
-  script: ./deploy_stack.sh
+  command: ./deploy_stack.sh
   args:
     chdir: "{{ openfaas_path }}"
   register: faas
