@@ -34,6 +34,7 @@
   command: ./deploy_stack.sh
   args:
     chdir: "{{ openfaas_path }}"
+  changed_when: no
   register: faas
 
 - debug: msg="{{ faas.stdout }}"
