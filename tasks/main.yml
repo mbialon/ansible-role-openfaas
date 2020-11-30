@@ -2,7 +2,7 @@
 - name: Register faas-cli version
   command: /usr/local/bin/faas-cli version --short-version
   register: faascli_version
-  ignore_errors: yes
+  ignore_errors: true
   changed_when: no
 
 - name: Download faas-cli install script
@@ -15,6 +15,7 @@
 
 - name: Execute faas-cli install script
   command: "{{ openfaas_cli_script_path }}"
+  become: true
   when: faascli_installer_download is succeeded
 
 - name: Remove faas-cli install script
