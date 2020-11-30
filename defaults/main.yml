@@ -1,6 +1,7 @@
 ---
 openfaas_cli_script_url: https://cli.openfaas.com
 openfaas_cli_script_path: /tmp/faas-cli.sh
+openfaas_cli_version: 0.12.19
 
 openfaas_repo_url: https://github.com/openfaas/faas.git
 openfaas_path: faas

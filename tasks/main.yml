@@ -1,16 +1,18 @@
 ---
 - name: Register faas-cli version
-  command: /usr/local/bin/faas-cli version --short-version
+  command: /usr/local/bin/faas-cli version --short-version --warn-update=false
   register: faascli_version
   ignore_errors: true
   changed_when: no
+
+- debug: msg="cli version {{ faascli_version.stdout }}"
 
 - name: Download faas-cli install script
   get_url:
     url: "{{ openfaas_cli_script_url }}"
     dest: "{{ openfaas_cli_script_path }}"
     mode: 0755
-  when: faascli_version is failed
+  when: faascli_version.stdout == openfaas_cli_version
   register: faascli_installer_download
 
 - name: Execute faas-cli install script
