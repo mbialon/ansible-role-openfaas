@@ -16,13 +16,13 @@
 - name: Execute faas-cli install script
   command: "{{ openfaas_cli_script_path }}"
   become: true
-  when: faascli_installer_download is succeeded
+  when: faascli_installer_download is succeeded and faascli_installer_download is not skipped
 
 - name: Remove faas-cli install script
   file:
     path: "{{ openfaas_cli_script_path }}"
     state: absent
-  when: faascli_installer_download is succeeded
+  when: faascli_installer_download is succeeded and faascli_installer_download is not skipped
 
 - name: Get faas
   git:
